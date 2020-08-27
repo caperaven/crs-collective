@@ -7,6 +7,7 @@ export class BaseRule {
      */
     constructor(options) {
         this.options = Object.assign({}, options);
+        this.getValue = this.options.field != null ? item => item[this.options.field] : item => item[this.options.index];
     }
 
     /**
