@@ -1,6 +1,31 @@
-// import files you want part of your library here.
-import {MyClass} from "./my-class.js"
+import {BaseSet} from "./base/base-set.js";
+import {StartsWithRule} from "./filter/starts-with-rule.js";
+import {EndsWithRule} from "./filter/ends-with-rule.js";
+import {EqualsRule} from "./filter/equals-rule.js";
+import {NotEqualsRule} from "./filter/not-equals-rule.js";
+import {ContainsRule} from "./filter/contains-rule.js";
+import {GreaterThanRule} from "./filter/greater-than-rule.js";
+import {LessThanRule} from "./filter/less-than-rule.js";
+import {BetweenRule} from "./filter/between-rule.js";
+import {OneOfRule} from "./filter/one-of-rule.js";
+import {SetValueRule} from "./update/set-value-rule.js"
+import {UpdateRuleSet} from "./update/update-rule-set.js";
 
-
-// export your api here.
-export {MyClass}
+globalThis.crsCollective = globalThis.crsCollective || {
+    RuleSet: BaseSet,
+    filters: {
+        StartsWithRule: StartsWithRule,
+        EndsWithRule: EndsWithRule,
+        EqualsRule: EqualsRule,
+        NotEqualsRule: NotEqualsRule,
+        ContainsRule: ContainsRule,
+        GreaterThanRule: GreaterThanRule,
+        LessThanRule: LessThanRule,
+        BetweenRule: BetweenRule,
+        OneOfRule: OneOfRule
+    },
+    update: {
+        UpdateRuleSet: UpdateRuleSet,
+        SetValueRule: SetValueRule
+    }
+};

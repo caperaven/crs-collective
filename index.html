@@ -8,6 +8,27 @@
     <title>Document</title>
 </head>
 <body>
+    <script type="module" src="src/index.js"></script>
 
+    <script type="module">
+        import {data} from "./data.js";
+
+        // const updateSet = new crsCollective.update.UpdateRuleSet();
+        // updateSet.add([
+        //     new crsCollective.update.SetValueRule({field: "isActive", value: true}),
+        //     new crsCollective.update.SetValueRule({field: "isA", value: true, condition: "item.code.indexOf('A') != -1"}),
+        // ]);
+        //
+        // updateSet.execute(data);
+        // console.log(data);
+
+        const set = new crsCollective.RuleSet();
+        set.add([
+            new crsCollective.filters.OneOfRule({field: "code", value: ["A", "B"]})
+        ]);
+
+        const result = data.filter(item => set.execute(item));
+        console.log(result);
+    </script>
 </body>
 </html>
