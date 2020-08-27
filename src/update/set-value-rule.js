@@ -19,6 +19,10 @@ export class SetValueRule extends BaseRule {
             return false;
         }
 
+        if (this.options.ruleSet && this.options.ruleSet.execute(item) == false) {
+            return false;
+        }
+
         item[this.options.field] = this.options.value;
         return true;
     }

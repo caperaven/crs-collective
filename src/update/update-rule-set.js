@@ -2,11 +2,11 @@ import {BaseSet} from "./../base/base-set.js";
 
 export class UpdateRuleSet extends BaseSet {
     execute(collection) {
-        let result = true;
         for (let item of collection) {
-            result = super.execute(item);
-            if (result == false) break;
+            for (let rule of this._rules) {
+                rule.execute(item);
+            }
         }
-        return result;
+        return true;
     }
 }
