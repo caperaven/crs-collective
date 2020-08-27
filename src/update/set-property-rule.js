@@ -1,11 +1,11 @@
 import {BaseRule} from "../base/base-rule.js";
 
-export class SetValueRule extends BaseRule {
+export class SetPropertyRule extends BaseRule {
     constructor(options) {
         super(options);
 
         if (options.condition != null) {
-            this.evaluate = new Function("item", `return ${options.condition}`);
+            this.evaluate = new Function("model", `return ${options.condition}`);
         }
     }
 
@@ -15,6 +15,15 @@ export class SetValueRule extends BaseRule {
     }
 
     execute(item) {
+        if (this.isValid(item) == true)
+        {
+            item[this.options.field] = this.options.value;
+        }
+
+        return true;
+    }
+
+    isValid(item) {
         if (this.evaluate && this.evaluate(item) == false) {
             return false;
         }
@@ -23,7 +32,6 @@ export class SetValueRule extends BaseRule {
             return false;
         }
 
-        item[this.options.field] = this.options.value;
         return true;
     }
 }

@@ -8,12 +8,13 @@ import {GreaterThanRule} from "./filter/greater-than-rule.js";
 import {LessThanRule} from "./filter/less-than-rule.js";
 import {BetweenRule} from "./filter/between-rule.js";
 import {OneOfRule} from "./filter/one-of-rule.js";
-import {SetValueRule} from "./update/set-value-rule.js"
+import {SetPropertyRule} from "./update/set-property-rule.js"
+import {DeletePropertyRule} from "./update/delete-property-rule.js";
 import {UpdateRuleSet} from "./update/update-rule-set.js";
 
 globalThis.crsCollective = globalThis.crsCollective || {
     RuleSet: BaseSet,
-    filters: {
+    validate: {
         StartsWithRule: StartsWithRule,
         EndsWithRule: EndsWithRule,
         EqualsRule: EqualsRule,
@@ -26,6 +27,7 @@ globalThis.crsCollective = globalThis.crsCollective || {
     },
     update: {
         UpdateRuleSet: UpdateRuleSet,
-        SetValueRule: SetValueRule
+        SetPropertyRule: SetPropertyRule,
+        DeletePropertyRule: DeletePropertyRule
     }
 };

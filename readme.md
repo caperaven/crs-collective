@@ -24,7 +24,7 @@ More often than not you don't need to define the `globalThis` so you can also ju
 Rules are the smallest standalone executable that performs an action or checks a condition.  
 In the API you rules are grouped under their respective types:
 
-1. filter
+1. validation
 1. update
 
 Rules can be used individually or as a set.  
@@ -32,25 +32,32 @@ All rules should have a `execute` function and a result of type boolean indicati
 
 Common rules packaged by default are:
 
-### Filter Rules
+### Validate Rules
 
-1. crsCollective.filter.StartsWithRule
-1. crsCollective.filter.EndsWithRule
-1. crsCollective.filter.EqualsRule
-1. crsCollective.filter.NotEqualsRule
-1. crsCollective.filter.ContainsRule
-1. crsCollective.filter.GreaterThanRule
-1. crsCollective.filter.LessThanRule
-1. crsCollective.filter.BetweenRule
-1. crsCollective.filter.OneOfRule
+1. crsCollective.validate.StartsWithRule
+1. crsCollective.validate.EndsWithRule
+1. crsCollective.validate.EqualsRule
+1. crsCollective.validate.NotEqualsRule
+1. crsCollective.validate.ContainsRule
+1. crsCollective.validate.GreaterThanRule
+1. crsCollective.validate.LessThanRule
+1. crsCollective.validate.BetweenRule
+1. crsCollective.validate.OneOfRule
+
+These rules are used to validate an object's values and use as part of a array filter process
 
 ### Update Rules
 
-1. crsCollective.update.SetValueRule
+1. crsCollective.update.SetPropertyRule
+1. crsCollective.update.DeletePropertyRule
+
+These rules are used to update the values of fields in an array
+
+### Using rules
 
 you can easily construct a rule 
 ```js
-new crsCollective.filters.OneOfRule({field: "code", value: ["A", "B"]})
+new crsCollective.validate.OneOfRule({field: "code", value: ["A", "B"]})
 ```
 
 Note how you pass in a object literal to the constructor.  
@@ -65,4 +72,21 @@ The two properties that most always are required are:
 Sets are a collection of rules.  
 Sets also have `execute` functions and also return either true or false.  
 The set will execute each rule and as soon as a rule fails, the set will also fail.  
-If you don't want this behaviour create a new class based on BaseSet and override the execute function.  
+If you don't want this behaviour create a new class based on BaseSet and override the execute function.
+
+Set's execute one item at a time.  
+
+There are two ways you can add rules to sets.
+
+1. As a parameter on the `constructor`.
+1. Using the set's `add` function.
+
+## Updating values
+
+Changing values in the array is done by the updates section of crsCollective.  
+`SetPropertyRule` and `DeletePropertyRule` assumes that the collection is a array of objects.
+To do batch updates you must use a instance of `UpdateRuleSet`.
+
+The execute function on `UpdateRuleSet` takes a array as the parameter.
+
+ 

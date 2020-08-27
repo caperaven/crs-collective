@@ -5,14 +5,19 @@ export class BaseSet {
     /**
      * @constructor
      */
-    constructor() {
+    constructor(rules) {
         this._rules = [];
+
+        if (rules != null) {
+            this.add(rules);
+        }
     }
 
     /**
      * Free memory before releasing object
      */
     dispose() {
+        this._rules.forEach(rule => rule.dispose());
         this._rules.length = 0;
         delete this._rules;
     }
