@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+
 <h3>Simple filter using validation</h3>
 
 <ul>
@@ -18,10 +19,16 @@
 <script type="module">
     import {data} from "./simple-data.js";
 
-    const filter = new crsCollective.RuleSet([new crsCollective.validate.EqualsRule({field: "isActive", value: true})]);
-    const result = data.filter(item => filter.execute(item));
+    // Update the data
+    const ruleSet = new crsCollective.update.UpdateRuleSet([
+        new crsCollective.update.SetPropertyRule({field: "isActive", value: true})
+    ]);
+
+    ruleSet.execute(data);
+
+    // Display the updated list
     const fragment = document.createDocumentFragment();
-    result.forEach(item => {
+    data.forEach(item => {
         const li = document.createElement("li");
         li.textContent = `${item.code} - ${item.isActive}`;
         fragment.appendChild(li);

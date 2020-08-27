@@ -8,19 +8,19 @@
     <title>Document</title>
 </head>
 <body>
-    <h3>Single Object Validation</h3>
+<h3>Single Object Validation</h3>
 
-    <p></p>
+<p></p>
 
-    <script type="module" src="./../src/index.js"></script>
-    <script type="module">
-        const data = {
-            code: "Hello World",
-            isActive: true
-        };
+<script type="module" src="./../src/index.js"></script>
+<script type="module">
+    const data = {
+        code: "Hello World",
+        isActive: true
+    };
 
-        const rule = new crsCollective.validate.EqualsRule({field: "isActive", value: true});
-        document.querySelector("p").textContent = `Object is valid = ${rule.execute(data)}`;
-    </script>
+    const rule = new crsCollective.validate.EqualsRule({field: "isActive", value: true});
+    document.querySelector("p").textContent = `Object is valid = ${rule.execute(data)}`;
+</script>
 </body>
 </html>
