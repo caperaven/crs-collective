@@ -33,17 +33,14 @@ export class BaseSet {
     /**
      * Execute the ruleset on a item
      * @param item {Obect} what item do you want to execute the rules on
-     * @param endOnFail {boolean} default is true, stop processing as soon as a rule fails
      * @returns {boolean} did the set pass of rail execution
      */
-    execute(item, endOnFail = true) {
+    execute(item) {
         let result = true;
 
         for (let rule of this._rules) {
             result = rule.execute(item);
-            if (endOnFail == true && result == false) {
-                break;
-            }
+            if (result == false) break;
         }
 
         return result;
