@@ -16,42 +16,11 @@
 
     <h3>Update</h3>
     <a href="app/simple-update.html">Simple Update</a> <br/>
-    <a href="app/conditional-update.html">Conditional Update</a>
+    <a href="app/conditional-update.html">Conditional Update</a> <br/>
+    <a href="app/ruleset-update.html">Ruleset Update</a> <br/>
 
-<!--    <script type="module" src="src/index.js"></script>-->
-
-<!--    <script type="module">-->
-<!--        import {data} from "./data.js";-->
-
-<!--        const ruleSet = new crsCollective.RuleSet();-->
-<!--        ruleSet.add([-->
-<!--            new crsCollective.validate.OneOfRule({field: "code", value: ["A", "B", "C"]})-->
-<!--        ]);-->
-
-<!--        const updateSet = new crsCollective.update.UpdateRuleSet();-->
-<!--        updateSet.add([-->
-<!--            new crsCollective.update.SetPropertyRule({field: "isActive", value: true}),-->
-<!--            new crsCollective.update.SetPropertyRule({field: "isA", value: true, condition: "model.code.indexOf('A') != -1"}),-->
-<!--            new crsCollective.update.SetPropertyRule({field: "single", value: true, ruleSet: ruleSet})-->
-<!--        ]);-->
-
-<!--        updateSet.execute(data);-->
-<!--        console.log(data);-->
-<!--        updateSet.dispose();-->
-
-<!--        // const set = new crsCollective.RuleSet();-->
-<!--        // set.add([-->
-<!--        //     new crsCollective.validate.OneOfRule({field: "code", value: ["A", "B"]})-->
-<!--        // ]);-->
-<!--        //-->
-<!--        // const result = data.filter(item => set.execute(item));-->
-<!--        // console.log(result);-->
-<!--        // set.dispose();-->
-
-
-<!--        // JHR TODO-->
-<!--        // 1. Create execute function from sets for more efficient memory usage-->
-<!--        // 2. Create sets from schema-->
-<!--    </script>-->
+<!-- // JHR TODO -->
+<!-- // 1. Create execute function from sets for more efficient memory usage -->
+<!-- // 2. Create sets from schema -->
 </body>
 </html>

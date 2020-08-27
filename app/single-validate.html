@@ -21,6 +21,8 @@
 
     const rule = new crsCollective.validate.EqualsRule({field: "isActive", value: true});
     document.querySelector("p").textContent = `Object is valid = ${rule.execute(data)}`;
+
+    console.log(data);
 </script>
 </body>
 </html>

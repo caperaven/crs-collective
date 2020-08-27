@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h3>Update data using condition</h3>
+<h3>Update values conditionally based on rule set</h3>
 
 <ul>
 
@@ -19,9 +19,11 @@
 <script type="module">
     import {data} from "./simple-data.js";
 
+    const validationSet = new crsCollective.RuleSet([new crsCollective.validate.EqualsRule({field: "isActive", value: true})]);
+
     // Update the data
     const ruleSet = new crsCollective.update.UpdateRuleSet([
-        new crsCollective.update.SetPropertyRule({field: "inValid", value: true, condition: "model.isActive == false"})
+        new crsCollective.update.SetPropertyRule({field: "inValid", value: true, ruleSet: validationSet})
     ]);
 
     ruleSet.execute(data);
