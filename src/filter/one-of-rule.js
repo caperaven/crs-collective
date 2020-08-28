@@ -2,6 +2,7 @@ import {BaseRule} from "../base/base-rule.js";
 
 export class OneOfRule extends BaseRule {
     execute(item) {
-        return this.options.value.indexOf(this.getValue(item)) != -1;
+        const value = this.getValue(item);
+        return value.indexOf(this.options.value) != -1;
     }
 }
