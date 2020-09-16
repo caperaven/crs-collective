@@ -1,16 +1,18 @@
 import {BaseSet} from "./base/base-set.js";
-import {StartsWithRule} from "./filter/starts-with-rule.js";
-import {EndsWithRule} from "./filter/ends-with-rule.js";
-import {EqualsRule} from "./filter/equals-rule.js";
-import {NotEqualsRule} from "./filter/not-equals-rule.js";
-import {ContainsRule} from "./filter/contains-rule.js";
-import {GreaterThanRule} from "./filter/greater-than-rule.js";
-import {LessThanRule} from "./filter/less-than-rule.js";
-import {BetweenRule} from "./filter/between-rule.js";
-import {OneOfRule} from "./filter/one-of-rule.js";
+import {StartsWithRule} from "./validation/starts-with-rule.js";
+import {EndsWithRule} from "./validation/ends-with-rule.js";
+import {EqualsRule} from "./validation/equals-rule.js";
+import {NotEqualsRule} from "./validation/not-equals-rule.js";
+import {ContainsRule} from "./validation/contains-rule.js";
+import {GreaterThanRule} from "./validation/greater-than-rule.js";
+import {LessThanRule} from "./validation/less-than-rule.js";
+import {BetweenRule} from "./validation/between-rule.js";
+import {OneOfRule} from "./validation/one-of-rule.js";
 import {SetPropertyRule} from "./update/set-property-rule.js"
 import {DeletePropertyRule} from "./update/delete-property-rule.js";
 import {UpdateRuleSet} from "./update/update-rule-set.js";
+import {trim, leftTrim, rightTrim, toUpperCase, toLowerCase, subString, concat, utcnow, datemod, datediff,
+    year, month, day, hour, minutes, seconds, max, min, abs, pow} from "./processors/actions.js";
 
 globalThis.crsCollective = globalThis.crsCollective || {
     RuleSet: BaseSet,
@@ -25,9 +27,38 @@ globalThis.crsCollective = globalThis.crsCollective || {
         BetweenRule: BetweenRule,
         OneOfRule: OneOfRule
     },
+
     update: {
         UpdateRuleSet: UpdateRuleSet,
         SetPropertyRule: SetPropertyRule,
         DeletePropertyRule: DeletePropertyRule
+    },
+
+    actions: {
+        trim: trim,
+        leftTrim: leftTrim,
+        rightTrim: rightTrim,
+        toUpperCase: toUpperCase,
+        toLowerCase: toLowerCase,
+        subString: subString,
+
+        concat: concat, // ?
+
+        utcnow: utcnow,
+        datemod: datemod,
+        datediff: datediff,
+
+        // -------------------------
+
+        year: year,
+        month: month,
+        day: day,
+        hour: hour,
+        minutes: minutes,
+        seconds: seconds,
+        max: max,
+        min: min,
+        abs: abs,
+        pow: pow
     }
 };

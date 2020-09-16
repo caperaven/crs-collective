@@ -1,4 +1,6 @@
-import {ContainsRule} from "./../../src/filter/contains-rule.js";
+import {ContainsRule} from "../../src/validation/contains-rule.js";
+import {BetweenRule} from "../../src/validation/between-rule.js";
+import {BaseSet} from "../../src/base/base-set.js";
 
 test("BetweenRule - execute", () => {
     const instance = new ContainsRule({field: "value", value: "s"});
@@ -15,4 +17,15 @@ test("BetweenRule - execute - index", () => {
 
     const i2 = new ContainsRule({index: 0, value: "S"});
     expect(i2.execute(["Alpha", "Beta", "Charley"])).toBeFalsy();
+});
+
+test("BetweenRule - code", () => {
+    const instance = new ContainsRule({field: "value", value: "s"});
+
+    const filter = new BaseSet([instance]);
+    const fn = filter.toFunction({field: "value"});
+    filter.dispose();
+
+    expect(fn({value: "Test"})).toBeTruthy();
+    expect(fn({value: "Woot"})).toBeFalsy();
 });

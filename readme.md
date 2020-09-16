@@ -84,9 +84,46 @@ There are two ways you can add rules to sets.
 ## Updating values
 
 Changing values in the array is done by the updates section of crsCollective.  
-`SetPropertyRule` and `DeletePropertyRule` assumes that the collection is a array of objects.
+`SetPropertyRule` and `DeletePropertyRule` assumes that the collection is an array of objects.
 To do batch updates you must use a instance of `UpdateRuleSet`.
 
 The execute function on `UpdateRuleSet` takes a array as the parameter.
 
- 
+## toFunction
+
+The nice thing about these rule sets are that they are dynamic, you can easily add, remove and event order the rules as you need.  
+The downside is that they take up a bit of memory and execution time is not as fast as a static function.  
+When processing large arrays performance and memory footprint is important.  
+This is where the set's toFunction function comes in.  
+
+This will condense the structure of all the rules into a single function.  
+Once you have this function you can dispose of the set using it's `dispose` function.
+
+Here is a use case example.
+
+```js
+// 1. Get the data
+const data = [
+    { value: 1 }, { value: 2 }, { value: 3 }, { value: 4 },{ value: 5 }
+]
+
+// 2. Set up a ruleset to be used for filtering
+const filter = new crsCollective.RuleSet([
+    new crsCollective.validate.GreaterThanRule({field: "value", value: 2})
+]);
+
+// 3. Get a filter function from the rule set
+const fn = filter.toFunction({field: "value"});
+
+// 4. Dispose of the rule set
+filter.dispose();
+
+// 5. Filter the data.
+const result = data.filter(item => fn(item));
+console.log(result);
+```
+
+The advantage of the static function is that it takes up much less memory and performs faster.  
+It is however static and if the rules change will need to be re-generated.
+
+This only applies to evaluation rule sets and not update rule sets.

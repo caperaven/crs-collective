@@ -9,4 +9,8 @@ export class UpdateRuleSet extends BaseSet {
         }
         return true;
     }
+
+    toFunction(options) {
+        return null;
+    }
 }

@@ -1,7 +1,7 @@
 import {BaseSet} from "./../src/base/base-set.js";
-import {EqualsRule} from "./../src/filter/equals-rule.js";
+import {EqualsRule} from "../src/validation/equals-rule.js";
 
-test("BaseSet - execute - filter example", () => {
+test("BaseSet - execute - validation example", () => {
     const set = new BaseSet([new EqualsRule({field: "isActive", value: true})]);
     const data = [
         {

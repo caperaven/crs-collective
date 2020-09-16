@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h3>Single Object Validation</h3>
+
+<p></p>
+
+<script type="module" src="./../src/index.js"></script>
+<script type="module">
+    const data = [
+        { value: 1 }, { value: 2 }, { value: 3 }, { value: 4 },{ value: 5 }
+    ]
+
+    const filter = new crsCollective.RuleSet([
+        new crsCollective.validate.GreaterThanRule({field: "value", value: 2})
+    ]);
+
+    const fn = filter.toFunction({field: "value"});
+    filter.dispose();
+
+    const result = data.filter(item => fn(item));
+    console.log(result);
+</script>
+</body>
+</html>

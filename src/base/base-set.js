@@ -50,4 +50,21 @@ export class BaseSet {
 
         return result;
     }
+
+    toFunction(options) {
+        const getValueStr = options.field != null ? `item["${options.field}"]` : `item[${options.index}]`;
+
+        const src = [
+            "let valid = true;",
+            `const value = ${getValueStr};`
+        ];
+
+        for (let rule of this._rules) {
+            src.push(rule.code);
+            src.push("if (valid == false) return false;");
+        }
+
+        src.push("return valid");
+        return new Function("item", src.join("\n"));
+    }
 }
