@@ -127,3 +127,28 @@ The advantage of the static function is that it takes up much less memory and pe
 It is however static and if the rules change will need to be re-generated.
 
 This only applies to evaluation rule sets and not update rule sets.
+
+## Actions
+
+This library ships with a set of utility functions
+
+1. trim
+1. leftTrim
+1. rightTrim
+1. toUpperCase
+1. toLowerCase
+1. subString
+1. concat
+1. datediff
+1. year
+1. month
+1. day
+1. hour
+1. minutes
+1. seconds
+1. max
+1. min
+1. abs
+1. pow
+
+For examples on how to use these utility functions see [the tests](https://github.com/caperaven/crs-collective/blob/master/test/processors/actions.test.js)
