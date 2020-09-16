@@ -11,8 +11,8 @@ import {OneOfRule} from "./validation/one-of-rule.js";
 import {SetPropertyRule} from "./update/set-property-rule.js"
 import {DeletePropertyRule} from "./update/delete-property-rule.js";
 import {UpdateRuleSet} from "./update/update-rule-set.js";
-import {trim, leftTrim, rightTrim, toUpperCase, toLowerCase, subString, concat, utcnow, datemod, datediff,
-    year, month, day, hour, minutes, seconds, max, min, abs, pow} from "./processors/actions.js";
+import {trim, leftTrim, rightTrim, toUpperCase, toLowerCase, subString, concat, datediff,
+    year, month, day, hours, minutes, seconds, max, min, abs, pow} from "./processors/actions.js";
 
 globalThis.crsCollective = globalThis.crsCollective || {
     RuleSet: BaseSet,
@@ -41,19 +41,12 @@ globalThis.crsCollective = globalThis.crsCollective || {
         toUpperCase: toUpperCase,
         toLowerCase: toLowerCase,
         subString: subString,
-
-        concat: concat, // ?
-
-        utcnow: utcnow,
-        datemod: datemod,
+        concat: concat,
         datediff: datediff,
-
-        // -------------------------
-
         year: year,
         month: month,
         day: day,
-        hour: hour,
+        hour: hours,
         minutes: minutes,
         seconds: seconds,
         max: max,
