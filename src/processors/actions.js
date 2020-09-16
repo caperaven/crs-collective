@@ -57,9 +57,9 @@ export function subString(value, from, length) {
 /**
  * concat values
  * examples:
- * 1. crsCollective.actions.concat("Hello", "World");           // standard parameters
- * 2. crsCollective.actions.concat(["Hello", "World"]);         // parameters as an array of values
- * 3. crsCollective.actions.concat(["Hello", "World"], "2");    // combination of 1 and 2
+ * 1. crsCollective.processors.concat("Hello", "World");           // standard parameters
+ * 2. crsCollective.processors.concat(["Hello", "World"]);         // parameters as an array of values
+ * 3. crsCollective.processors.concat(["Hello", "World"], "2");    // combination of 1 and 2
  * @param args
  * @returns {string}
  */
@@ -76,48 +76,40 @@ export function concat(...args) {
     return result.join("");
 }
 
-export function utcnow() {
-
-}
-
-export function datemod() {
-
-}
-
 export function datediff(date1, date2) {
     return date2 - date1;
 }
 
 export function year(date) {
-
+    return date.getFullYear();
 }
 
 export function month(date) {
-
+    return date.getMonth();
 }
 
 export function day(date) {
-
+    return date.getDate();
 }
 
-export function hour(date) {
-
+export function hours(date) {
+    return date.getHours();
 }
 
 export function minutes(date) {
-
+    return date.getMinutes();
 }
 
 export function seconds(date) {
-
+    return date.getSeconds();
 }
 
 /**
  * Get the maximum value
  * examples:
- * 1. crsCollective.actions.max(1, 2, 3)         // standard arguments
- * 2. crsCollective.actions.max([1, 2, 3])       // parameters as an array of values
- * 3. crsCollective.actions.max([1, 2, 3], 4, 5) // combination of 1 and 2
+ * 1. crsCollective.processors.max(1, 2, 3)         // standard arguments
+ * 2. crsCollective.processors.max([1, 2, 3])       // parameters as an array of values
+ * 3. crsCollective.processors.max([1, 2, 3], 4, 5) // combination of 1 and 2
  * @param values {numbers} values to compare
  * @returns {number} the largest number
  */
@@ -139,9 +131,9 @@ export function max(...values) {
 /**
  * Get the min value
  * examples:
- * 1. crsCollective.actions.min(1, 2, 3)         // standard arguments
- * 2. crsCollective.actions.min([1, 2, 3])       // parameters as an array of values
- * 3. crsCollective.actions.min([1, 2, 3], 4, 5) // combination of 1 and 2
+ * 1. crsCollective.processors.min(1, 2, 3)         // standard arguments
+ * 2. crsCollective.processors.min([1, 2, 3])       // parameters as an array of values
+ * 3. crsCollective.processors.min([1, 2, 3], 4, 5) // combination of 1 and 2
  * @param values {numbers} values to compare
  * @returns {number} the smallest number
  */
