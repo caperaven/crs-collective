@@ -11,10 +11,17 @@ import {OneOfRule} from "./validation/one-of-rule.js";
 import {SetPropertyRule} from "./update/set-property-rule.js"
 import {DeletePropertyRule} from "./update/delete-property-rule.js";
 import {UpdateRuleSet} from "./update/update-rule-set.js";
+import {SerializableFilter} from "./factory/serializable-filter.js";
+
 import {trim, leftTrim, rightTrim, toUpperCase, toLowerCase, subString, concat, datediff, year, month, day, hours, minutes, seconds, max, min, abs, pow} from "./processors/actions.js";
 
 globalThis.crsCollective = globalThis.crsCollective || {
     RuleSet: BaseSet,
+
+    filter: {
+        create: () => new SerializableFilter()
+    },
+
     validate: {
         StartsWithRule: StartsWithRule,
         EndsWithRule: EndsWithRule,
