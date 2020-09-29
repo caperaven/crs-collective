@@ -58,11 +58,32 @@ export class SerializableFilter {
         return result;
     }
 
+    fromSchema(schema) {
+        const functions = {
+            "once-off": this.onceOff,
+            "between": this.between,
+            "less-than": this.lessThan,
+            "greater-than": this.greaterThan,
+            "equals": this.equals,
+            "starts-with": this.startsWith,
+            "ends-width": this.endsWith,
+            "contains": this.contains
+        }
+
+        for(const item of schema) {
+            functions[item.rule](item.field, item.value);
+        }
+    }
+
     toArray(rule, map, array) {
         map.forEach((value, key) => array.push({
             "rule": rule,
             "field": key,
             "value": value
         }));
+    }
+
+    toFunction() {
+        return null;
     }
 }

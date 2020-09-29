@@ -152,3 +152,29 @@ This library ships with a set of utility functions
 1. pow
 
 For examples on how to use these utility functions see [the tests](https://github.com/caperaven/crs-collective/blob/master/test/processors/actions.test.js)
+
+## Schema
+
+Often you want to have filters run on web workers to get it off of the main thread.  
+The problem is that you can't send complex objects over thread boundaries, but you can send json.
+
+CRS Collective has a simplified filter class that you can use to define filters and then save that filter to a schema.
+
+```js
+const filter = crsCollective.filter.create();
+filter.onceOff("siteCode", ["A11", "A12"]);
+filter.onceOff("locationCode", ["JB", "CPT"]);
+
+filter.between("numberValue", 10, 20);
+filter.lessThan("numberValue", 15);
+filter.greaterThan("number", 5);
+filter.equals("date", Date.now());
+filter.startsWith("siteCode", "A");
+filter.endsWith("siteCode", "B");
+filter.contains("siteCode", "12")
+
+const schema = filter.toSchema();
+document.documentElement.innerHTML = JSON.stringify(schema);
+```
+
+You can also load the schema using `fromSchema(json)`, and create a filter function using `toFunction`

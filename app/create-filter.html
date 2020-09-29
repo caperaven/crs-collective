@@ -14,6 +14,7 @@
         const filter = crsCollective.filter.create();
         filter.onceOff("siteCode", ["A11", "A12"]);
         filter.onceOff("locationCode", ["JB", "CPT"]);
+
         filter.between("numberValue", 10, 20);
         filter.lessThan("numberValue", 15);
         filter.greaterThan("number", 5);
@@ -23,7 +24,15 @@
         filter.contains("siteCode", "12")
 
         const schema = filter.toSchema();
-        document.documentElement.innerHTML = JSON.stringify(schema, null, 4);
+        document.documentElement.innerHTML = JSON.stringify(schema);
+
+        const filter2 = crsCollective.filter.create();
+        filter2.fromSchema(schema);
+
+        console.log(filter);
+        console.log(filter2);
+
+        const fn = filter2.toFunction();
     </script>
 </body>
 </html>
