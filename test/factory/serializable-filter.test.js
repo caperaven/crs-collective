@@ -38,7 +38,7 @@ test("serializable - toSchema", () => {
     const schema = filter.toSchema();
     expect(schema.length).toEqual(9);
 
-    assertSchemaItem(schema[0], "one-off", "siteCode", ["A11", "A12"]);
+    assertSchemaItem(schema[0], "one-of", "siteCode", ["A11", "A12"]);
     assertSchemaItem(schema[1], "between", "numberValue", [10, 20]);
     assertSchemaItem(schema[2], "less-than", "numberValue", 15);
     assertSchemaItem(schema[3], "greater-than", "number", 5);
