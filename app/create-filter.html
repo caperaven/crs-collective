@@ -22,15 +22,17 @@
         filter.startsWith("siteCode", "A");
         filter.endsWith("siteCode", "B");
         filter.contains("siteCode", "12")
+        filter.contains("subOjb.siteCode", "12");
 
         const schema = filter.toSchema();
         document.documentElement.innerHTML = JSON.stringify(schema);
 
-        const filter2 = crsCollective.filter.create();
+        let filter2 = crsCollective.filter.create();
         filter2.fromSchema(schema);
 
         const fn = filter2.toFunction({date: "date", numberValue: "number"});
-        debugger;
+        filter2.dispose();
+        filter2 = null;
     </script>
 </body>
 </html>

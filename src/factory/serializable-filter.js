@@ -49,6 +49,7 @@ export class SerializableFilter {
             map = null;
         };
         maps.length = 0;
+        maps = null;
     }
 
     setMapValue(field, ...values) {

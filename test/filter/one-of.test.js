@@ -2,9 +2,9 @@ import {OneOfRule} from "../../src/validation/one-of-rule.js";
 import {BaseSet} from "../../src/base/base-set.js";
 
 test("OneOfRule - execute", () => {
-    const instance = new OneOfRule({field: "value", value: "a"});
-    expect(instance.execute({value: ["a", "b", "c"]})).toBeTruthy();
-    expect(instance.execute({value: ["b", "c", "d"]})).toBeFalsy();
+    const instance = new OneOfRule({field: "value", value: ["a", "b", "c"]});
+    expect(instance.execute({value: "a"})).toBeTruthy();
+    expect(instance.execute({value: "d"})).toBeFalsy();
 });
 
 test("OneOfRule - execute - index", () => {

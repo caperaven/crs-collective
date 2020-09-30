@@ -39,6 +39,6 @@ export class BaseRule {
     }
 
     getValueStr() {
-        return this.options.field != null ? `value = item["${this.options.field}"]` : `value = item[${this.options.index}]`;
+        return this.options.field != null ? `value = item.${this.options.field}` : `value = item[${this.options.index}]`;
     }
 }
