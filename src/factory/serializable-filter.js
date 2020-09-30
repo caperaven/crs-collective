@@ -7,11 +7,12 @@ import {GreaterThanRule} from "./../validation/greater-than-rule.js";
 import {LessThanRule} from "./../validation/less-than-rule.js";
 import {BetweenRule} from "./../validation/between-rule.js";
 import {OneOfRule} from "./../validation/one-of-rule.js";
+import {BaseSet} from "./../base/base-set.js";
 
 
 export class SerializableFilter {
     constructor() {
-        this.oneOffMap = new Map();
+        this.oneOfMap = new Map();
         this.betweenMap = new Map();
         this.lessThanMap = new Map();
         this.greaterThanMap = new Map();
@@ -21,7 +22,7 @@ export class SerializableFilter {
         this.endsWithMap = new Map();
         this.containsMap = new Map();
 
-        this.oneOff = this.setRawMapValue.bind(this.oneOffMap);
+        this.oneOf = this.setRawMapValue.bind(this.oneOfMap);
         this.between = this.setMapValue.bind(this.betweenMap);
         this.lessThan = this.setMapValue.bind(this.lessThanMap);
         this.greaterThan = this.setMapValue.bind(this.greaterThanMap);
@@ -33,7 +34,7 @@ export class SerializableFilter {
     }
 
     dispose() {
-        this.oneOff = null;
+        this.oneOf = null;
         this.between = null;
         this.lessThan = null;
         this.greaterThan = null;
@@ -43,7 +44,7 @@ export class SerializableFilter {
         this.contains = null;
         this.notEquals = null;
 
-        let maps = [this.oneOffMap, this.betweenMap, this.lessThanMap, this.greaterThanMap, this.equalsMap, this.startsWithMap, this.endsWithMap, this.containsMap, this.notEqualsMap];
+        let maps = [this.oneOfMap, this.betweenMap, this.lessThanMap, this.greaterThanMap, this.equalsMap, this.startsWithMap, this.endsWithMap, this.containsMap, this.notEqualsMap];
 
         for (let map of maps) {
             map.clear();
@@ -55,7 +56,7 @@ export class SerializableFilter {
     }
 
     clear() {
-        this.oneOffMap.clear();
+        this.oneOfMap.clear();
         this.betweenMap.clear();
         this.lessThanMap.clear();
         this.greaterThanMap.clear();
@@ -81,14 +82,14 @@ export class SerializableFilter {
     toSchema() {
         const result = [];
 
-        this.toArray("one-off", this.oneOffMap, result);
+        this.toArray("one-of", this.oneOfMap, result);
         this.toArray("between", this.betweenMap, result);
         this.toArray("less-than", this.lessThanMap, result);
         this.toArray("greater-than", this.greaterThanMap, result);
         this.toArray("equals", this.equalsMap, result);
         this.toArray("not-equals", this.notEqualsMap, result);
         this.toArray("starts-with", this.startsWithMap, result);
-        this.toArray("ends-width", this.endsWithMap, result);
+        this.toArray("ends-with", this.endsWithMap, result);
         this.toArray("contains", this.containsMap, result);
 
         return result;
@@ -96,14 +97,14 @@ export class SerializableFilter {
 
     fromSchema(schema) {
         const functions = {
-            "one-off": this.oneOff,
+            "one-of": this.oneOf,
             "between": this.between,
             "less-than": this.lessThan,
             "greater-than": this.greaterThan,
             "equals": this.equals,
             "not-equals": this.notEquals,
             "starts-with": this.startsWith,
-            "ends-width": this.endsWith,
+            "ends-with": this.endsWith,
             "contains": this.contains
         }
 
@@ -121,8 +122,8 @@ export class SerializableFilter {
     }
 
     toFunction(options) {
-        let filter = new crsCollective.RuleSet();
-        this.oneOffMap.forEach((value, key) => filter.add(new OneOfRule({field: key, value: value, dataType: options[key]})));
+        let filter = new BaseSet();
+        this.oneOfMap.forEach((value, key) => filter.add(new OneOfRule({field: key, value: value, dataType: options[key]})));
         this.betweenMap.forEach((value, key) => filter.add(new BetweenRule({field: key, minValue: value[0], maxValue: value[1], dataType: options[key]})));
         this.lessThanMap.forEach((value, key) => filter.add(new LessThanRule({field: key, value: value, dataType: options[key]})));
         this.greaterThanMap.forEach((value, key) => filter.add(new GreaterThanRule({field: key, value: value, dataType: options[key]})));

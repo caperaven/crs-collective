@@ -12,8 +12,8 @@
 
     <script type="module">
         const filter = crsCollective.filter.create();
-        filter.oneOff("siteCode", ["A11", "A12"]);
-        filter.oneOff("locationCode", ["JB", "CPT"]);
+        filter.oneOf("siteCode", ["A11", "A12"]);
+        filter.oneOf("locationCode", ["JB", "CPT"]);
 
         filter.between("numberValue", 10, 20);
         filter.lessThan("numberValue", 15);
@@ -32,11 +32,7 @@
         let filter2 = crsCollective.filter.create();
         filter2.fromSchema(schema);
 
-        const start = performance.now();
         const fn = filter2.toFunction({date: "date", numberValue: "number"});
-        const end = performance.now();
-
-        console.log(end - start);
         filter2.dispose();
         filter2 = null;
     </script>
