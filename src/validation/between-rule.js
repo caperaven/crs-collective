@@ -8,7 +8,7 @@ import {BaseRule} from "../base/base-rule.js";
  */
 export class BetweenRule extends BaseRule {
     get code() {
-        return `valid = value >= ${this.options.minValue} && value <= ${this.options.maxValue};`
+        return `${this.getValueStr()}; valid = value >= ${this.options.minValue} && value <= ${this.options.maxValue};`
     }
 
     execute(item) {

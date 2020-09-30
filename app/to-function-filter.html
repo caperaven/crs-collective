@@ -22,7 +22,7 @@
         new crsCollective.validate.GreaterThanRule({field: "value", value: 2})
     ]);
 
-    const fn = filter.toFunction({field: "value"});
+    const fn = filter.toFunction();
     filter.dispose();
 
     const result = data.filter(item => fn(item));

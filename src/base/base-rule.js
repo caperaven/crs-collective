@@ -29,4 +29,8 @@ export class BaseRule {
     getCodeValueStr() {
         return typeof this.options.value == "string" ? `"${this.options.value}"` : this.options.value
     }
+
+    getValueStr() {
+        return this.options.field != null ? `value = item["${this.options.field}"]` : `value = item[${this.options.index}]`;
+    }
 }

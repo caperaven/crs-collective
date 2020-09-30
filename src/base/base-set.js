@@ -52,12 +52,7 @@ export class BaseSet {
     }
 
     toFunction(options) {
-        const getValueStr = options.field != null ? `item["${options.field}"]` : `item[${options.index}]`;
-
-        const src = [
-            "let valid = true;",
-            `const value = ${getValueStr};`
-        ];
+        const src = ["let value;", "let valid = true"];
 
         for (let rule of this._rules) {
             src.push(rule.code);

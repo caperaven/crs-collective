@@ -2,7 +2,7 @@ import {BaseRule} from "../base/base-rule.js";
 
 export class EndsWithRule extends BaseRule {
     get code() {
-        return `valid = value.endsWith("${this.options.value}");`;
+        return `${this.getValueStr()}; valid = value.endsWith("${this.options.value}");`;
     }
 
     execute(item) {
