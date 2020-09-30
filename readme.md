@@ -162,8 +162,8 @@ CRS Collective has a simplified filter class that you can use to define filters 
 
 ```js
 const filter = crsCollective.filter.create();
-filter.onceOff("siteCode", ["A11", "A12"]);
-filter.onceOff("locationCode", ["JB", "CPT"]);
+filter.oneOff("siteCode", ["A11", "A12"]);
+filter.oneOff("locationCode", ["JB", "CPT"]);
 
 filter.between("numberValue", 10, 20);
 filter.lessThan("numberValue", 15);

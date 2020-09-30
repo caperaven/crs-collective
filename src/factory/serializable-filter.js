@@ -21,7 +21,7 @@ export class SerializableFilter {
         this.endsWithMap = new Map();
         this.containsMap = new Map();
 
-        this.onceOff = this.setMapValue.bind(this.oneOffMap);
+        this.oneOff = this.setRawMapValue.bind(this.oneOffMap);
         this.between = this.setMapValue.bind(this.betweenMap);
         this.lessThan = this.setMapValue.bind(this.lessThanMap);
         this.greaterThan = this.setMapValue.bind(this.greaterThanMap);
@@ -33,7 +33,7 @@ export class SerializableFilter {
     }
 
     dispose() {
-        this.onceOff = null;
+        this.oneOff = null;
         this.between = null;
         this.lessThan = null;
         this.greaterThan = null;
@@ -52,13 +52,21 @@ export class SerializableFilter {
     }
 
     setMapValue(field, ...values) {
-        this.set(field, Object.assign(values));
+        let result = values;
+        if (result.length == 1) {
+            result = result[0]
+        }
+        this.set(field, result);
+    }
+
+    setRawMapValue(field, values) {
+        this.set(field, values);
     }
 
     toSchema() {
         const result = [];
 
-        this.toArray("once-off", this.oneOffMap, result);
+        this.toArray("one-off", this.oneOffMap, result);
         this.toArray("between", this.betweenMap, result);
         this.toArray("less-than", this.lessThanMap, result);
         this.toArray("greater-than", this.greaterThanMap, result);
@@ -73,7 +81,7 @@ export class SerializableFilter {
 
     fromSchema(schema) {
         const functions = {
-            "once-off": this.onceOff,
+            "one-off": this.oneOff,
             "between": this.between,
             "less-than": this.lessThan,
             "greater-than": this.greaterThan,
@@ -99,15 +107,15 @@ export class SerializableFilter {
 
     toFunction(options) {
         let filter = new crsCollective.RuleSet();
-        this.oneOffMap.forEach((value, key) => filter.push(new OneOfRule({field: key, value: value})));
-        this.betweenMap.forEach((value, key) => filter.push(new BetweenRule({field: key, value: value})));
-        this.lessThanMap.forEach((value, key) => filter.push(new LessThanRule({field: key, value: value})));
-        this.greaterThanMap.forEach((value, key) => filter.push(new GreaterThanRule({field: key, value: value})));
-        this.equalsMap.forEach((value, key) => filter.push(new EqualsRule({field: key, value: value})));
-        this.notEqualsMap.forEach((value, key) => filter.push(new NotEqualsRule({field: key, value: value})));
-        this.startsWithMap.forEach((value, key) => filter.push(new StartsWithRule({field: key, value: value})));
-        this.endsWithMap.forEach((value, key) => filter.push(new EndsWithRule({field: key, value: value})));
-        this.containsMap.forEach((value, key) => filter.push(new ContainsRule({field: key, value: value})));
+        this.oneOffMap.forEach((value, key) => filter.add(new OneOfRule({field: key, value: value, dataType: options[key]})));
+        this.betweenMap.forEach((value, key) => filter.add(new BetweenRule({field: key, minValue: value[0], maxValue: value[1], dataType: options[key]})));
+        this.lessThanMap.forEach((value, key) => filter.add(new LessThanRule({field: key, value: value, dataType: options[key]})));
+        this.greaterThanMap.forEach((value, key) => filter.add(new GreaterThanRule({field: key, value: value, dataType: options[key]})));
+        this.equalsMap.forEach((value, key) => filter.add(new EqualsRule({field: key, value: value, dataType: options[key]})));
+        this.notEqualsMap.forEach((value, key) => filter.add(new NotEqualsRule({field: key, value: value, dataType: options[key]})));
+        this.startsWithMap.forEach((value, key) => filter.add(new StartsWithRule({field: key, value: value, dataType: options[key]})));
+        this.endsWithMap.forEach((value, key) => filter.add(new EndsWithRule({field: key, value: value, dataType: options[key]})));
+        this.containsMap.forEach((value, key) => filter.add(new ContainsRule({field: key, value: value, dataType: options[key]})));
         const result = filter.toFunction(options);
         filter.dispose();
         filter = null;

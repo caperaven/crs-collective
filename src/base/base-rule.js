@@ -27,7 +27,15 @@ export class BaseRule {
     }
 
     getCodeValueStr() {
-        return typeof this.options.value == "string" ? `"${this.options.value}"` : this.options.value
+        return typeof this.options.value == "string" ? `"${this.getCodeValueTyped()}"` : this.getCodeValueTyped();
+    }
+
+    getCodeValueTyped() {
+        switch(this.options.dataType) {
+            case undefined: return this.options.value;
+            case "date": return `new Date(${this.options.value})`;
+            case "number": return `Number(${this.options.value})`;
+        }
     }
 
     getValueStr() {
