@@ -44,12 +44,26 @@ export class SerializableFilter {
         this.notEquals = null;
 
         let maps = [this.oneOffMap, this.betweenMap, this.lessThanMap, this.greaterThanMap, this.equalsMap, this.startsWithMap, this.endsWithMap, this.containsMap, this.notEqualsMap];
+
         for (let map of maps) {
             map.clear();
             map = null;
-        };
+        }
+
         maps.length = 0;
         maps = null;
+    }
+
+    clear() {
+        this.oneOffMap.clear();
+        this.betweenMap.clear();
+        this.lessThanMap.clear();
+        this.greaterThanMap.clear();
+        this.equalsMap.clear();
+        this.notEqualsMap.clear();
+        this.startsWithMap.clear();
+        this.endsWithMap.clear();
+        this.containsMap.clear();
     }
 
     setMapValue(field, ...values) {

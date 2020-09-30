@@ -27,10 +27,16 @@
         const schema = filter.toSchema();
         document.documentElement.innerHTML = JSON.stringify(schema);
 
+        filter.clear();
+
         let filter2 = crsCollective.filter.create();
         filter2.fromSchema(schema);
 
+        const start = performance.now();
         const fn = filter2.toFunction({date: "date", numberValue: "number"});
+        const end = performance.now();
+
+        console.log(end - start);
         filter2.dispose();
         filter2 = null;
     </script>
