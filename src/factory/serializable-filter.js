@@ -133,6 +133,7 @@ export class SerializableFilter {
 
     toFunction(options) {
         let filter = new BaseSet();
+        options = options || {};
         this.oneOfMap.forEach((value, key) => filter.add(new OneOfRule({field: key, value: value, dataType: options[key]})));
         this.betweenMap.forEach((value, key) => filter.add(new BetweenRule({field: key, minValue: value[0], maxValue: value[1], dataType: options[key]})));
         this.lessThanMap.forEach((value, key) => filter.add(new LessThanRule({field: key, value: value, dataType: options[key]})));
