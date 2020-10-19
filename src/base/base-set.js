@@ -51,7 +51,7 @@ export class BaseSet {
         return result;
     }
 
-    toFunction(options) {
+    toFunction() {
         const src = ["let value;", "let valid = true"];
 
         for (let rule of this._rules) {

@@ -11,7 +11,7 @@ test("OneOfRule - code", () => {
     const instance = new OneOfRule({field: "value", value: ["a", "b", "c"]});
 
     const filter = new BaseSet([instance]);
-    const fn = filter.toFunction({field: "value"});
+    const fn = filter.toFunction();
     filter.dispose();
 
     expect(fn({value: "a"})).toBeTruthy();
